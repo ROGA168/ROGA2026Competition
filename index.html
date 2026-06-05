@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROGA Competition｜ROGA 国际辩论赛事</title>
+
+  <style>
+    :root {
+      --navy: #05122b;
+      --navy-2: #0b1f46;
+      --navy-3: #102f68;
+      --gold: #d9a441;
+      --gold-2: #ffd36a;
+      --gold-3: #8b5d1b;
+      --white: #ffffff;
+      --muted: #d8e1f0;
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-strong: rgba(255, 255, 255, 0.13);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", "Segoe UI", Arial, "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 211, 106, 0.18), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(24, 90, 190, 0.28), transparent 30%),
+        linear-gradient(135deg, #020714 0%, #071c3b 42%, #02040b 100%);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .gold-orb {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 211, 106, 0.22), transparent 68%);
+      filter: blur(10px);
+      pointer-events: none;
+      z-index: -1;
+      animation: floatOrb 12s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      top: 10%;
+      left: -90px;
+    }
+
+    .orb-2 {
+      right: -110px;
+      bottom: 12%;
+      animation-delay: 4s;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-35px) scale(1.08); }
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(3, 11, 26, 0.78);
+      border-bottom: 1px solid rgba(255, 211, 106, 0.26);
+    }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .code-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .roga-word {
+      display: flex;
+      align-items: center;
+      gap: 1px;
+      letter-spacing: -3px;
+    }
+
+    .roga-word span {
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1;
+      text-shadow:
+        0 3px 0 rgba(0, 0, 0, 0.35),
+        0 0 18px rgba(255, 211, 106, 0.32);
+    }
+
+    .r { color: #ffb000; }
+    .g { color: #57c13f; }
+    .a {
+      color: #ffffff;
+      position: relative;
+      margin-left: 2px;
+    }
+
+    .o-mark {
+      width: clamp(32px, 4.3vw, 48px);
+      height: clamp(32px, 4.3vw, 48px);
+      border-radius: 50%;
+      border: clamp(7px, 0.85vw, 10px) solid #ff6a00;
+      position: relative;
+      display: inline-block;
+      transform: translateY(3px);
+      box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.2);
+    }
+
+    .o-mark::after {
+      content: "";
+      position: absolute;
+      width: 46%;
+      height: 46%;
+      border-radius: 50%;
+      background: #071833;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .logo-sub {
+      border-left: 1px solid rgba(255, 211, 106, 0.6);
+      padding-left: 16px;
+      margin-left: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo-sub strong {
+      font-size: clamp(15px, 2vw, 21px);
+      letter-spacing: 3px;
+      color: var(--gold-2);
+      text-shadow: 0 0 18px rgba(255, 211, 106, 0.45);
+    }
+
+    .logo-sub small {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.25s;
+    }
+
+    .nav-link:hover {
+      color: var(--gold-2);
+    }
+
+    .lang-switch {
+      position: relative;
+      display: flex;
+      padding: 4px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 211, 106, 0.28);
+      border-radius: 999px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.22);
+    }
+
+    .lang-switch button {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      padding: 9px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
+      transition: 0.25s;
+    }
+
+    .lang-switch button.active {
+      color: #06142e;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+    }
+
+    .hero {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 74px 0 38px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 44px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border: 1px solid rgba(255, 211, 106, 0.36);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--gold-2);
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold-2);
+      box-shadow: 0 0 18px var(--gold-2);
+    }
+
+    .hero h1 {
+      font-family: Georgia, "Times New Roman", "Microsoft YaHei", serif;
+      font-size: clamp(38px, 6vw, 78px);
+      line-height: 1.05;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+    }
+
+    .gold-text {
+      background: linear-gradient(135deg, #fff4bd 0%, #ffd36a 32%, #b77b25 65%, #fff0b0 100%);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 12px 42px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero p {
+      color: #d9e3f5;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.8;
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 13px 21px;
+      font-weight: 900;
+      transition: 0.28s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      color: #071833;
+      background: linear-gradient(135deg, #fff0b0, #d9a441);
+      box-shadow: 0 16px 38px rgba(217, 164, 65, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 50px rgba(217, 164, 65, 0.38);
+    }
+
+    .btn-ghost {
+      color: var(--gold-2);
+      border: 1px solid rgba(255, 211, 106, 0.4);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-3px);
+    }
+
+    .hero-panel {
+      position: relative;
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(255, 211, 106, 0.18), transparent),
+        rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 211, 106, 0.32);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(120deg, transparent, rgba(255, 211, 106, 0.24), transparent);
+      transform: translateX(-100%);
+      animation: shine 4s ease-in-out infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      42%, 100% { transform: translateX(100%); }
+    }
+
+    .hero-stat-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(5, 18, 43, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 36px;
+      color: var(--gold-2);
+      margin-bottom: 6px;
+      font-family: Georgia, serif;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 42px 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(28px, 4vw, 46px);
+      font-family: Georgia, "Times New Roman", "Microsoft YaHei", serif;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .competition-grid {
+      display: grid;
+      gap: 28px;
+    }
+
+    .competition-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      padding: 24px;
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(255, 211, 106, 0.12), transparent 34%),
+        rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 211, 106, 0.27);
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.26);
+      overflow: hidden;
+      transform: translateY(28px);
+      opacity: 0;
+      transition: 0.7s ease;
+    }
+
+    .competition-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .competition-card::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -120px;
+      top: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 211, 106, 0.22), transparent 70%);
+      pointer-events: none;
+    }
+
+    .poster-wrap {
+      position: relative;
+      z-index: 2;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 211, 106, 0.34);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.34);
+    }
+
+    .poster-wrap img {
+      width: 100%;
+      display: block;
+      transition: 0.45s ease;
+    }
+
+    .poster-wrap:hover img {
+      transform: scale(1.035);
+    }
+
+    .poster-badge {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(5, 18, 43, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 211, 106, 0.4);
+      color: var(--gold-2);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+      padding: 8px 4px;
+    }
+
+    .card-content h3 {
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height: 1.12;
+      font-family: Georgia, "Times New Roman", "Microsoft YaHei", serif;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: var(--gold-2);
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .info-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .info-item {
+      padding: 14px 15px;
+      border-radius: 16px;
+      background: rgba(5, 18, 43, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .info-item small {
+      display: block;
+      color: #9fb2d4;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .info-item strong {
+      color: white;
+      font-size: 15px;
+    }
+
+    .copy-box {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.065);
+      border: 1px solid rgba(255, 211, 106, 0.2);
+      color: #e8eef8;
+      line-height: 1.78;
+      margin-bottom: 16px;
+    }
+
+    .copy-box h4 {
+      color: var(--gold-2);
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .service-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 22px;
+    }
+
+    .service-pill {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 211, 106, 0.12);
+      border: 1px solid rgba(255, 211, 106, 0.3);
+      color: #ffe6a1;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mini-nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .mini-nav a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      transition: 0.25s;
+      font-size: 14px;
+    }
+
+    .mini-nav a:hover {
+      color: var(--gold-2);
+      transform: translateY(-2px);
+    }
+
+    .contact-section {
+      margin-top: 22px;
+      border-radius: 34px;
+      padding: 36px;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 211, 106, 0.18), transparent 35%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 211, 106, 0.3);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-section h2 {
+      font-family: Georgia, "Times New Roman", "Microsoft YaHei", serif;
+      font-size: clamp(30px, 4vw, 50px);
+      margin-bottom: 10px;
+    }
+
+    .contact-section p {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 760px;
+      margin: 0 auto 24px;
+    }
+
+    .qr-row {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .qr-card {
+      width: 190px;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(5, 18, 43, 0.72);
+      border: 1px solid rgba(255, 211, 106, 0.35);
+    }
+
+    .qr-placeholder {
+      width: 128px;
+      height: 128px;
+      margin: 0 auto 12px;
+      border-radius: 16px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.88));
+      border: 2px solid var(--gold);
+      box-shadow: inset 0 0 0 6px rgba(217, 164, 65, 0.08);
+      object-fit: cover;
+    }
+
+    .qr-card strong {
+      display: block;
+      color: var(--gold-2);
+    }
+
+    .footer {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 34px 0 46px;
+      color: #95a7c8;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .en {
+      display: none;
+    }
+
+    body.lang-en .zh {
+      display: none !important;
+    }
+
+    body.lang-en .en {
+      display: block !important;
+    }
+
+    body.lang-en .en.inline {
+      display: inline !important;
+    }
+
+    body.lang-en .en.flex {
+      display: flex !important;
+    }
+
+    body.lang-en .zh.inline,
+    body.lang-en .zh.flex {
+      display: none !important;
+    }
+
+    body.lang-zh .zh {
+      display: block;
+    }
+
+    body.lang-zh .zh.inline {
+      display: inline;
+    }
+
+    body.lang-zh .zh.flex {
+      display: flex;
+    }
+
+    body.lang-zh .en {
+      display: none !important;
+    }
+
+    .lang-poster-en {
+      display: none !important;
+    }
+
+    body.lang-en .lang-poster-zh {
+      display: none !important;
+    }
+
+    body.lang-en .lang-poster-en {
+      display: block !important;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: min(92vw, 760px);
+      max-height: 88vh;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 211, 106, 0.45);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.65);
+    }
+
+    .modal-close {
+      position: fixed;
+      right: 24px;
+      top: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 211, 106, 0.4);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 920px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 46px;
+      }
+
+      .competition-card {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .logo-sub small {
+        display: none;
+      }
+
+      .logo-sub {
+        padding-left: 10px;
+        margin-left: 2px;
+      }
+
+      .hero-stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-list {
+        grid-template-columns: 1fr;
+      }
+
+      .competition-card {
+        padding: 16px;
+        border-radius: 24px;
+      }
+
+      .contact-section {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body class="lang-zh">
+  <div class="gold-orb orb-1"></div>
+  <div class="gold-orb orb-2"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="code-logo" href="#">
+        <div class="roga-word" aria-label="ROGA">
+          <span class="r">R</span>
+          <span class="o-mark"></span>
+          <span class="g">G</span>
+          <span class="a">A</span>
+        </div>
+        <div class="logo-sub">
+          <strong>COMPETITION</strong>
+          <small>Debate · Growth · Global Exposure</small>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <a href="#competitions" class="nav-link zh inline">赛事列表</a>
+        <a href="#contact" class="nav-link zh inline">报名咨询</a>
+        <a href="#competitions" class="nav-link en inline">Tournaments</a>
+        <a href="#contact" class="nav-link en inline">Contact</a>
+
+        <div class="lang-switch">
+          <button id="btnZh" class="active" onclick="setLang('zh')">中文</button>
+          <button id="btnEn" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow zh">ROGA 国际辩论赛事资讯平台</div>
+      <div class="eyebrow en">ROGA International Debate Tournament Hub</div>
+
+      <h1>
+        <span class="zh">帮助学生走进<br><span class="gold-text">国际辩论赛场</span></span>
+        <span class="en">Empowering Students Through<br><span class="gold-text">International Debate</span></span>
+      </h1>
+
+      <p class="zh">
+        ROGA 为学生精选适合不同年龄与能力阶段的国际辩论赛事，提供赛事咨询、赛前训练、水平评估、组队与队员匹配服务，帮助孩子在真实比赛环境中提升表达力、逻辑力与国际视野。
+      </p>
+
+      <p class="en">
+        ROGA curates international debate tournaments for students at different ages and levels, offering tournament consultation, pre-tournament training, debater assessment, team formation, and teammate matching support.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#competitions" class="btn btn-primary zh inline">查看赛事</a>
+        <a href="#contact" class="btn btn-ghost zh inline">立即咨询</a>
+        <a href="#competitions" class="btn btn-primary en inline">View Tournaments</a>
+        <a href="#contact" class="btn btn-ghost en inline">Enquire Now</a>
+      </div>
+
+      <div class="mini-nav">
+        <a href="#comp1">Malaya 2026</a>
+        <a href="#comp2">Asia Pacific Junior 2026</a>
+        <a href="#comp3">Sishu Graha 2026</a>
+      </div>
+    </div>
+
+    <div class="hero-panel">
+      <div class="hero-stat-grid">
+        <div class="stat">
+          <strong>3</strong>
+          <span class="zh">精选国际赛事</span>
+          <span class="en">Featured Tournaments</span>
+        </div>
+        <div class="stat">
+          <strong>6</strong>
+          <span class="zh">中英文宣传海报</span>
+          <span class="en">Bilingual Posters</span>
+        </div>
+        <div class="stat">
+          <strong>7–18</strong>
+          <span class="zh">覆盖不同年龄段</span>
+          <span class="en">Age Range Support</span>
+        </div>
+        <div class="stat">
+          <strong>ROGA</strong>
+          <span class="zh">训练、匹配、报名支持</span>
+          <span class="en">Training & Matching Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="competitions" class="section">
+    <div class="section-title">
+      <div>
+        <h2 class="zh gold-text">2026 国际辩论赛事推荐</h2>
+        <h2 class="en gold-text">2026 International Debate Tournaments</h2>
+      </div>
+      <p class="zh">
+        点击海报可放大查看。切换语言后，网页内容与海报语言会同步切换。
+      </p>
+      <p class="en">
+        Click each poster to preview it in full size. The poster and page content switch together when you change language.
+      </p>
+    </div>
+
+    <div class="competition-grid">
+
+      <article id="comp1" class="competition-card reveal">
+        <div class="poster-wrap" onclick="openPoster(this)">
+          <span class="poster-badge zh">比赛 1｜线下赛事</span>
+          <span class="poster-badge en">Tournament 1｜In-Person</span>
+          <img class="lang-poster-zh" src="1.png" alt="马来亚校际辩论锦标赛中文海报">
+          <img class="lang-poster-en" src="2.png" alt="Malaya Interschool Debating Championships English Poster">
+        </div>
+
+        <div class="card-content">
+          <h3 class="zh gold-text">马来亚校际辩论锦标赛 2026</h3>
+          <h3 class="en gold-text">Malaya Interschool Debating Championships 2026</h3>
+
+          <div class="subtitle zh">高质量线下亚洲议会制辩论赛事</div>
+          <div class="subtitle en">High-Quality In-Person Asian Parliamentary Debate Tournament</div>
+
+          <div class="info-list">
+            <div class="info-item">
+              <small class="zh">比赛日期</small>
+              <small class="en">Date</small>
+              <strong class="zh">2026年7月18日–19日</strong>
+              <strong class="en">18–19 July 2026</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">举办形式</small>
+              <small class="en">Mode</small>
+              <strong class="zh">线下参赛，吉隆坡</strong>
+              <strong class="en">In Person, Kuala Lumpur</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">比赛赛制</small>
+              <small class="en">Format</small>
+              <strong class="zh">亚洲议会制辩论赛制</strong>
+              <strong class="en">Asian Parliamentary</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">适合水平</small>
+              <small class="en">Suitable Level</small>
+              <strong class="zh">竞赛级辩手</strong>
+              <strong class="en">Competition Class Debater</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">参赛资格</small>
+              <small class="en">Eligibility</small>
+              <strong class="zh">中学生</strong>
+              <strong class="en">Secondary School Students</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">报名截止</small>
+              <small class="en">Deadline</small>
+              <strong class="zh">6月20日</strong>
+              <strong class="en">20 June</strong>
+            </div>
+          </div>
+
+          <div class="copy-box">
+            <h4 class="zh">为什么参加本次赛事？</h4>
+            <h4 class="en">Why Join This Tournament?</h4>
+
+            <p class="zh">
+              暑假期间，想让孩子真正体验一场高质量线下国际辩论赛事吗？本次赛事由马来亚大学辩论社主办，赛事设置兼具思辨性的辩题，并提供详细点评，帮助学生提升论证能力、临场反应能力和团队配合能力。对于希望积累线下比赛经验、拓展国际视野、接触马来西亚本地及国际辩手的学生来说，这是一场非常值得参与的暑期赛事。
+            </p>
+
+            <p class="en">
+              Looking for a high-quality in-person debating experience during the summer holidays? Hosted by the University of Malaya Debating Society, this tournament offers thoughtful motions, detailed adjudication feedback, and a strong competitive environment where students can sharpen argumentation, rebuttal, teamwork, and confidence.
+            </p>
+          </div>
+
+          <div class="service-row">
+            <span class="service-pill zh">赛事报名咨询</span>
+            <span class="service-pill zh">赛前训练与模拟</span>
+            <span class="service-pill zh">选手水平评估</span>
+            <span class="service-pill zh">队员组队与匹配</span>
+
+            <span class="service-pill en">Registration Consultation</span>
+            <span class="service-pill en">Mock Practice</span>
+            <span class="service-pill en">Debater Assessment</span>
+            <span class="service-pill en">Team Matching</span>
+          </div>
+
+          <div class="card-actions">
+            <a href="#contact" class="btn btn-primary zh inline">咨询报名</a>
+            <a href="#contact" class="btn btn-primary en inline">Enquire Now</a>
+          </div>
+        </div>
+      </article>
+
+      <article id="comp2" class="competition-card reveal">
+        <div class="poster-wrap" onclick="openPoster(this)">
+          <span class="poster-badge zh">比赛 2｜线上赛事</span>
+          <span class="poster-badge en">Tournament 2｜Online</span>
+          <img class="lang-poster-zh" src="3.png" alt="亚太青年辩论锦标赛中文海报">
+          <img class="lang-poster-en" src="4.png" alt="Asia Pacific Junior Championships English Poster">
+        </div>
+
+        <div class="card-content">
+          <h3 class="zh gold-text">亚太青年辩论锦标赛 2026</h3>
+          <h3 class="en gold-text">Asia Pacific Junior Championships 2026</h3>
+
+          <div class="subtitle zh">高质量线上青少年国际辩论赛事</div>
+          <div class="subtitle en">High-Quality Online International Debate Tournament for Young Debaters</div>
+
+          <div class="info-list">
+            <div class="info-item">
+              <small class="zh">比赛日期</small>
+              <small class="en">Date</small>
+              <strong class="zh">6月27日–28日</strong>
+              <strong class="en">27–28 June</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">举办形式</small>
+              <small class="en">Mode</small>
+              <strong class="zh">Zoom线上参赛</strong>
+              <strong class="en">Online via Zoom</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">比赛赛制</small>
+              <small class="en">Format</small>
+              <strong class="zh">WSDC改编制</strong>
+              <strong class="en">WSDC Modified</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">适合水平</small>
+              <small class="en">Suitable Level</small>
+              <strong class="zh">初级、中级</strong>
+              <strong class="en">Beginner, Intermediate</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">参赛资格</small>
+              <small class="en">Eligibility</small>
+              <strong class="zh">7–14周岁</strong>
+              <strong class="en">Ages 7–14</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">报名截止</small>
+              <small class="en">Deadline</small>
+              <strong class="zh">6月10日</strong>
+              <strong class="en">10 June</strong>
+            </div>
+          </div>
+
+          <div class="copy-box">
+            <h4 class="zh">为什么参加本次赛事？</h4>
+            <h4 class="en">Why Join This Tournament?</h4>
+
+            <p class="zh">
+              亚太青年锦标赛为年轻辩手提供了绝佳机会，用以练习并精进课堂所学的辩论技能。赛事设置五轮预赛，每轮发言时长为4分钟，可帮助选手在友好的国际赛事环境中建立自信、优化论证结构，并培养竞技性辩论能力。特别适合刚开始参赛或从课堂训练走向正式比赛的学生。
+            </p>
+
+            <p class="en">
+              Asia Pacific Junior Championships gives young debaters a strong opportunity to practise and refine debate skills learned in class. With 4-minute speeches across 5 preliminary rounds, students can build confidence, improve structure, and develop competitive debating skills in a supportive international environment.
+            </p>
+          </div>
+
+          <div class="service-row">
+            <span class="service-pill zh">赛事报名咨询</span>
+            <span class="service-pill zh">赛前训练与模拟</span>
+            <span class="service-pill zh">选手水平评估</span>
+            <span class="service-pill zh">队员组队与匹配</span>
+
+            <span class="service-pill en">Registration Consultation</span>
+            <span class="service-pill en">Mock Practice</span>
+            <span class="service-pill en">Debater Assessment</span>
+            <span class="service-pill en">Team Matching</span>
+          </div>
+
+          <div class="card-actions">
+            <a href="#contact" class="btn btn-primary zh inline">咨询报名</a>
+            <a href="#contact" class="btn btn-primary en inline">Enquire Now</a>
+          </div>
+        </div>
+      </article>
+
+      <article id="comp3" class="competition-card reveal">
+        <div class="poster-wrap" onclick="openPoster(this)">
+          <span class="poster-badge zh">比赛 3｜线上进阶赛事</span>
+          <span class="poster-badge en">Tournament 3｜Advanced Online</span>
+          <img class="lang-poster-zh" src="5.png" alt="Sishu Graha中文海报">
+          <img class="lang-poster-en" src="6.png" alt="Sishu Graha English Poster">
+        </div>
+
+        <div class="card-content">
+          <h3 class="zh gold-text">Sishu Graha 议会制辩论赛 2026</h3>
+          <h3 class="en gold-text">Sishu Graha Parliamentary Debate 2026</h3>
+
+          <div class="subtitle zh">高质量线上 WSDC 中学生辩论赛事</div>
+          <div class="subtitle en">High-Quality Online WSDC Debate Tournament for Secondary School Students</div>
+
+          <div class="info-list">
+            <div class="info-item">
+              <small class="zh">比赛日期</small>
+              <small class="en">Date</small>
+              <strong class="zh">7月4日–5日</strong>
+              <strong class="en">4–5 July</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">时区</small>
+              <small class="en">Time Zone</small>
+              <strong>GMT +5:30</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">举办形式</small>
+              <small class="en">Mode</small>
+              <strong class="zh">Zoom线上进行</strong>
+              <strong class="en">Online via Zoom</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">比赛赛制</small>
+              <small class="en">Format</small>
+              <strong class="zh">WSDC赛制</strong>
+              <strong class="en">WSDC</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">适合水平</small>
+              <small class="en">Suitable Level</small>
+              <strong class="zh">中级及进阶辩手</strong>
+              <strong class="en">Intermediate & Advanced</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">报名截止</small>
+              <small class="en">Deadline</small>
+              <strong class="zh">6月15日</strong>
+              <strong class="en">15 June</strong>
+            </div>
+          </div>
+
+          <div class="copy-box">
+            <h4 class="zh">为什么参加本次赛事？</h4>
+            <h4 class="en">Why Join This Tournament?</h4>
+
+            <p class="zh">
+              Sishu Graha 议会制辩论赛是印度规模较大的中学生辩论赛事之一，本届为第六届。赛事适合已掌握 WSDC 基础规则、准备进入完整赛事场景的学生。核心裁判团包含与印度国家辩论队相关的教练与选拔官，可保障辩题质量，并提供围绕青年辩手成长的详尽反馈，尤其适合正在向完整时长竞技发言转型的学生。
+            </p>
+
+            <p class="en">
+              Sishu Graha Parliamentary Debate is one of India’s largest school debating competitions, now in its 6th edition. It is suitable for students who already understand WSDC fundamentals and are ready for a full tournament setting. The adjudication core includes coaches and selectors linked to the Indian national debate team, ensuring high-quality motions and detailed feedback.
+            </p>
+          </div>
+
+          <div class="service-row">
+            <span class="service-pill zh">赛事报名咨询</span>
+            <span class="service-pill zh">赛前训练与模拟</span>
+            <span class="service-pill zh">选手水平评估</span>
+            <span class="service-pill zh">队员组队与匹配</span>
+
+            <span class="service-pill en">Registration Consultation</span>
+            <span class="service-pill en">Mock Practice</span>
+            <span class="service-pill en">Debater Assessment</span>
+            <span class="service-pill en">Team Matching</span>
+          </div>
+
+          <div class="card-actions">
+            <a href="#contact" class="btn btn-primary zh inline">咨询报名</a>
+            <a href="#contact" class="btn btn-primary en inline">Enquire Now</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <section id="contact" class="section">
+    <div class="contact-section">
+      <h2 class="zh gold-text">名额有限，欢迎咨询报名</h2>
+      <h2 class="en gold-text">Limited Slots, Enquire and Register Now</h2>
+
+      <p class="zh">
+        家长可根据孩子年龄、英语表达能力、辩论基础与目标赛事，联系 ROGA 课程顾问进行参赛规划。ROGA 可协助提供赛事选择、赛前训练、水平评估、队员组队与匹配建议。
+      </p>
+
+      <p class="en">
+        Parents may contact ROGA for tournament planning based on the student’s age, English speaking ability, debate foundation, and competition goals. ROGA can support tournament selection, preparation, assessment, and teammate matching.
+      </p>
+
+      <div class="qr-row">
+  <div class="qr-card">
+    <img class="qr-placeholder zh" src="anna1.png" alt="Anna Teacher 中文咨询二维码">
+    <img class="qr-placeholder en" src="anna2.jpg" alt="Anna Teacher Chinese Support QR">
+    <strong>Anna Teacher</strong>
+    <span class="zh">中文咨询</span>
+    <span class="en">Chinese Support</span>
+  </div>
+
+  <div class="qr-card">
+    <img class="qr-placeholder zh" src="grace1.png" alt="Grace Teacher 英语咨询二维码">
+    <img class="qr-placeholder en" src="grace2.jpg" alt="Grace Teacher English Support QR">
+    <strong>Grace Teacher</strong>
+    <span class="zh">英语咨询</span>
+    <span class="en">English Support</span>
+  </div>
+</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="zh">© 2026 ROGA Competition. Building Debaters, Shaping Leaders.</span>
+    <span class="en">© 2026 ROGA Competition. Building Debaters, Shaping Leaders.</span>
+  </footer>
+
+  <div id="posterModal" class="modal" onclick="closePoster(event)">
+    <button class="modal-close" onclick="forceClosePoster()">×</button>
+    <img id="modalImage" src="" alt="Poster Preview">
+  </div>
+
+  <script>
+    function setLang(lang) {
+      document.body.classList.remove('lang-zh', 'lang-en');
+      document.body.classList.add(lang === 'en' ? 'lang-en' : 'lang-zh');
+
+      document.getElementById('btnZh').classList.toggle('active', lang === 'zh');
+      document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+
+      localStorage.setItem('roga_lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('roga_lang');
+    if (savedLang === 'en') {
+      setLang('en');
+    } else {
+      setLang('zh');
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.18
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function openPoster(wrapper) {
+      const isEnglish = document.body.classList.contains('lang-en');
+      const img = wrapper.querySelector(isEnglish ? '.lang-poster-en' : '.lang-poster-zh');
+      const modal = document.getElementById('posterModal');
+      const modalImage = document.getElementById('modalImage');
+
+      modalImage.src = img.src;
+      modal.classList.add('open');
+    }
+
+    function closePoster(event) {
+      if (event.target.id === 'posterModal') {
+        forceClosePoster();
+      }
+    }
+
+    function forceClosePoster() {
+      document.getElementById('posterModal').classList.remove('open');
+      document.getElementById('modalImage').src = '';
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        forceClosePoster();
+      }
+    });
+  </script>
+</body>
+</html>
