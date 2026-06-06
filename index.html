@@ -310,6 +310,30 @@
       box-shadow: 0 22px 50px rgba(217, 164, 65, 0.38);
     }
 
+    .roga-register {
+      position: relative;
+      overflow: hidden;
+      animation: pulseGlow 2.4s ease-in-out infinite;
+    }
+
+    .roga-register::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
+      transform: translateX(-120%);
+      transition: 0.45s;
+    }
+
+    .roga-register:hover::after {
+      transform: translateX(120%);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 16px 38px rgba(217, 164, 65, 0.28); }
+      50% { box-shadow: 0 20px 52px rgba(255, 211, 106, 0.52); }
+    }
+
     .btn-ghost {
       color: var(--gold-2);
       border: 1px solid rgba(255, 211, 106, 0.4);
@@ -627,11 +651,21 @@
       height: 128px;
       margin: 0 auto 12px;
       border-radius: 16px;
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.88));
+      background: #ffffff;
       border: 2px solid var(--gold);
       box-shadow: inset 0 0 0 6px rgba(217, 164, 65, 0.08);
-      object-fit: cover;
+      padding: 6px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
     }
 
     .qr-card strong {
@@ -856,19 +890,20 @@
       <div class="mini-nav">
         <a href="#comp1">Malaya 2026</a>
         <a href="#comp2">Asia Pacific Junior 2026</a>
-        <a href="#comp3">Sishu Graha 2026</a>
+        <a href="#comp3">Oxford WSDC 2026</a>
+        <a href="#comp4">Sishu Graha 2026</a>
       </div>
     </div>
 
     <div class="hero-panel">
       <div class="hero-stat-grid">
         <div class="stat">
-          <strong>3</strong>
+          <strong>4</strong>
           <span class="zh">精选国际赛事</span>
           <span class="en">Featured Tournaments</span>
         </div>
         <div class="stat">
-          <strong>6</strong>
+          <strong>8</strong>
           <span class="zh">中英文宣传海报</span>
           <span class="en">Bilingual Posters</span>
         </div>
@@ -982,8 +1017,8 @@
           </div>
 
           <div class="card-actions">
-            <a href="#contact" class="btn btn-primary zh inline">咨询报名</a>
-            <a href="#contact" class="btn btn-primary en inline">Enquire Now</a>
+            <a href="https://forms.gle/iMPgRsnkSqDDJTCq9" target="_blank" rel="noopener noreferrer" class="btn btn-primary roga-register zh inline">✨ 从ROGA报名</a>
+            <a href="https://forms.gle/iMPgRsnkSqDDJTCq9" target="_blank" rel="noopener noreferrer" class="btn btn-primary roga-register en inline">✨ Register via ROGA</a>
           </div>
         </div>
       </article>
@@ -1014,7 +1049,7 @@
               <small class="zh">举办形式</small>
               <small class="en">Mode</small>
               <strong class="zh">Zoom线上参赛</strong>
-              <strong class="en">Online via Zoom</strong>
+              <strong class="en">Online</strong>
             </div>
             <div class="info-item">
               <small class="zh">比赛赛制</small>
@@ -1068,18 +1103,104 @@
           </div>
 
           <div class="card-actions">
-            <a href="#contact" class="btn btn-primary zh inline">咨询报名</a>
-            <a href="#contact" class="btn btn-primary en inline">Enquire Now</a>
+            <a href="https://forms.gle/e7mBJ6mr5gpgYjAt8" target="_blank" rel="noopener noreferrer" class="btn btn-primary roga-register zh inline">✨ 从ROGA报名</a>
+            <a href="https://forms.gle/e7mBJ6mr5gpgYjAt8" target="_blank" rel="noopener noreferrer" class="btn btn-primary roga-register en inline">✨ Register via ROGA</a>
           </div>
         </div>
       </article>
 
       <article id="comp3" class="competition-card reveal">
         <div class="poster-wrap" onclick="openPoster(this)">
-          <span class="poster-badge zh">比赛 3｜线上进阶赛事</span>
-          <span class="poster-badge en">Tournament 3｜Advanced Online</span>
-          <img class="lang-poster-zh" src="5.png" alt="Sishu Graha中文海报">
-          <img class="lang-poster-en" src="6.png" alt="Sishu Graha English Poster">
+          <span class="poster-badge zh">比赛 3｜Oxford WSDC</span>
+          <span class="poster-badge en">Tournament 3｜Oxford WSDC</span>
+          <img class="lang-poster-zh" src="5.png" alt="Oxford WSDC 中文海报">
+          <img class="lang-poster-en" src="6.png" alt="Oxford WSDC English Poster">
+        </div>
+
+        <div class="card-content">
+          <h3 class="zh gold-text">Oxford WSDC 2026</h3>
+          <h3 class="en gold-text">Oxford WSDC 2026</h3>
+
+          <div class="subtitle zh">高水平国际线上 WSDC 辩论赛事</div>
+          <div class="subtitle en">High-Level International Online WSDC Debate Tournament</div>
+
+          <div class="info-list">
+            <div class="info-item">
+              <small class="zh">比赛日期</small>
+              <small class="en">Date</small>
+              <strong class="zh">详见报名表</strong>
+              <strong class="en">See registration form</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">时区</small>
+              <small class="en">Time Zone</small>
+              <strong class="zh">详见报名表</strong>
+              <strong class="en">See registration form</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">举办形式</small>
+              <small class="en">Mode</small>
+              <strong class="zh">线上进行</strong>
+              <strong class="en">Online via Zoom</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">比赛赛制</small>
+              <small class="en">Format</small>
+              <strong class="zh">WSDC赛制</strong>
+              <strong class="en">WSDC</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">适合水平</small>
+              <small class="en">Suitable Level</small>
+              <strong class="zh">中级及进阶辩手</strong>
+              <strong class="en">Intermediate & Advanced</strong>
+            </div>
+            <div class="info-item">
+              <small class="zh">报名截止</small>
+              <small class="en">Deadline</small>
+              <strong class="zh">详见报名表</strong>
+              <strong class="en">See registration form</strong>
+            </div>
+          </div>
+
+          <div class="copy-box">
+            <h4 class="zh">为什么参加本次赛事？</h4>
+            <h4 class="en">Why Join This Tournament?</h4>
+
+            <p class="zh">
+              Oxford WSDC 2026 适合已经具备 WSDC 基础、希望进一步挑战国际线上赛事的学生。比赛能够帮助选手在更高水平的辩题与对抗中提升立论、反驳、团队配合与临场表达能力，是积累国际赛事经验的重要机会。
+            </p>
+
+            <p class="en">
+              Oxford WSDC 2026 is suitable for students with WSDC foundations who are ready to challenge themselves in an international online debate setting. It helps students strengthen case construction, rebuttal, teamwork, and confident delivery through competitive tournament practice.
+            </p>
+          </div>
+
+          <div class="service-row">
+            <span class="service-pill zh">赛事报名咨询</span>
+            <span class="service-pill zh">赛前训练与模拟</span>
+            <span class="service-pill zh">选手水平评估</span>
+            <span class="service-pill zh">队员组队与匹配</span>
+
+            <span class="service-pill en">Registration Consultation</span>
+            <span class="service-pill en">Mock Practice</span>
+            <span class="service-pill en">Debater Assessment</span>
+            <span class="service-pill en">Team Matching</span>
+          </div>
+
+          <div class="card-actions">
+            <a href="https://forms.gle/RacQxH7djhStcZNPA" target="_blank" rel="noopener noreferrer" class="btn btn-primary roga-register zh inline">✨ 从ROGA报名</a>
+            <a href="https://forms.gle/RacQxH7djhStcZNPA" target="_blank" rel="noopener noreferrer" class="btn btn-primary roga-register en inline">✨ Register via ROGA</a>
+          </div>
+        </div>
+      </article>
+
+      <article id="comp4" class="competition-card reveal">
+        <div class="poster-wrap" onclick="openPoster(this)">
+          <span class="poster-badge zh">比赛 4｜线上进阶赛事</span>
+          <span class="poster-badge en">Tournament 4｜Advanced Online</span>
+          <img class="lang-poster-zh" src="7.png" alt="Sishu Graha 中文海报">
+          <img class="lang-poster-en" src="8.png" alt="Sishu Graha English Poster">
         </div>
 
         <div class="card-content">
@@ -1153,11 +1274,12 @@
           </div>
 
           <div class="card-actions">
-            <a href="#contact" class="btn btn-primary zh inline">咨询报名</a>
-            <a href="#contact" class="btn btn-primary en inline">Enquire Now</a>
+            <a href="https://forms.gle/rETUGCnTTHGkTjMj8" target="_blank" rel="noopener noreferrer" class="btn btn-primary roga-register zh inline">✨ 从ROGA报名</a>
+            <a href="https://forms.gle/rETUGCnTTHGkTjMj8" target="_blank" rel="noopener noreferrer" class="btn btn-primary roga-register en inline">✨ Register via ROGA</a>
           </div>
         </div>
       </article>
+
 
     </div>
   </main>
@@ -1176,22 +1298,25 @@
       </p>
 
       <div class="qr-row">
-  <div class="qr-card">
-    <img class="qr-placeholder zh" src="anna1.png" alt="Anna Teacher 中文咨询二维码">
-    <img class="qr-placeholder en" src="anna2.jpg" alt="Anna Teacher Chinese Support QR">
-    <strong>Anna Teacher</strong>
-    <span class="zh">中文咨询</span>
-    <span class="en">Chinese Support</span>
-  </div>
+        <div class="qr-card">
+          <div class="qr-placeholder">
+            <img class="zh" src="anna1.png" data-base="anna1" alt="Anna老师中文咨询二维码" onerror="tryQrFallback(this)">
+            <img class="en" src="anna2.png" data-base="anna2" alt="Anna Teacher Chinese Support QR Code" onerror="tryQrFallback(this)">
+          </div>
+          <strong>Anna Teacher</strong>
+          <span class="zh">中文咨询</span>
+          <span class="en">Chinese Support</span>
+        </div>
 
-  <div class="qr-card">
-    <img class="qr-placeholder zh" src="grace1.png" alt="Grace Teacher 英语咨询二维码">
-    <img class="qr-placeholder en" src="grace2.jpg" alt="Grace Teacher English Support QR">
-    <strong>Grace Teacher</strong>
-    <span class="zh">英语咨询</span>
-    <span class="en">English Support</span>
-  </div>
-</div>
+        <div class="qr-card">
+          <div class="qr-placeholder">
+            <img class="zh" src="grace1.png" data-base="grace1" alt="Grace老师英文咨询二维码" onerror="tryQrFallback(this)">
+            <img class="en" src="grace2.png" data-base="grace2" alt="Grace Teacher English Support QR Code" onerror="tryQrFallback(this)">
+          </div>
+          <strong>Grace Teacher</strong>
+          <span class="zh">英文咨询</span>
+          <span class="en">English Support</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1207,6 +1332,16 @@
   </div>
 
   <script>
+    function tryQrFallback(img) {
+      const base = img.dataset.base;
+      const exts = ['png', 'jpg', 'jpeg', 'webp'];
+      const current = Number(img.dataset.fallbackIndex || 0);
+      const next = current + 1;
+      if (!base || next >= exts.length) return;
+      img.dataset.fallbackIndex = String(next);
+      img.src = `${base}.${exts[next]}`;
+    }
+
     function setLang(lang) {
       document.body.classList.remove('lang-zh', 'lang-en');
       document.body.classList.add(lang === 'en' ? 'lang-en' : 'lang-zh');
