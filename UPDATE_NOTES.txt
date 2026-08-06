@@ -1,0 +1,11 @@
+ROGA 2026 Tournament Data Update Notes
+
+Compared with the previous six-event website, the revised workbook adds 10 future events: TOC JWSD, Delhi WSDC, Paris World Schools Championship, Eurasia WSDC, IYS Novice Debate Cup, Global Debate Cup, Asian Schools WSDC, Taiwan Schools Debating Challenge, Pan Asia WSDC, and IYS Junior BP Debate Cup.
+
+Corrections and cautions applied:
+- Laguna Pre-NDC uses GMT+8 and a 14 September deadline.
+- TOC JWSD is now dated 13–15 August; other details remain TBA.
+- Taiwan detail sheet incorrectly repeats Shanghai event data. Website uses Overview name/date (24–25 October) and flags other details for confirmation.
+- Paris narrative copied Delhi content in the workbook; website replaces it with a neutral Paris-specific description.
+- IYS Junior detail sheet repeats the IYS Novice event name; website flags exact junior eligibility for confirmation.
+- Overview and detail tabs disagree or omit fields in several events. Confirmed values are shown; unknown values are marked TBA rather than inferred.
